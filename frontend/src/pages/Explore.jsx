@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { Sidebar } from '../components/Sidebar'
 import { TopBar } from '../components/TopBar'
+import { getPlaceHeroImage } from '../utils/placeImages'
 
 export const Explore = () => {
     const navigate = useNavigate()
@@ -322,7 +323,15 @@ export const Explore = () => {
                                             className="card-premium overflow-hidden group cursor-pointer"
                                         >
                                             <div className="relative h-64 overflow-hidden">
-                                                <img src={dest.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={dest.name} />
+                                                <img
+                                                    src={getPlaceHeroImage(dest.name)}
+                                                    onError={(e) => {
+                                                        console.error(`Failed to load image for ${dest.name}`);
+                                                        e.target.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1600&q=80';
+                                                    }}
+                                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                                    alt={dest.name}
+                                                />
                                                 <div className="absolute top-4 left-4">
                                                     <div className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-xl text-[10px] font-black uppercase tracking-widest text-primary shadow-sm">
                                                         {dest.category}
@@ -382,7 +391,15 @@ export const Explore = () => {
                             </button>
 
                             <div className="md:w-1/2 h-80 md:h-[600px] relative">
-                                <img src={selectedPlace.image} className="w-full h-full object-cover" alt={selectedPlace.name} />
+                                <img
+                                    src={getPlaceHeroImage(selectedPlace.name)}
+                                    onError={(e) => {
+                                        console.error(`Failed to load modal image for ${selectedPlace.name}`);
+                                        e.target.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1600&q=80';
+                                    }}
+                                    className="w-full h-full object-cover"
+                                    alt={selectedPlace.name}
+                                />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
                                 <div className="absolute bottom-8 left-8 right-8">
                                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-lg mb-3 italic">

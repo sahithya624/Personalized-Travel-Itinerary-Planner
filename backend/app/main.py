@@ -25,7 +25,12 @@ settings = get_settings()
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_url, "http://localhost:3000", "http://localhost:5173"],
+    allow_origins=[
+        settings.frontend_url, 
+        "http://localhost:3000", 
+        "http://localhost:5173",
+        "https://personalized-travel-itinerary-plann.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
